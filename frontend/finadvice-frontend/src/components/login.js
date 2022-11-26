@@ -1,26 +1,57 @@
 import React from "react";
 import { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { API_URL } from "../api_config";
+import { useAuth } from "./auth";
+import axios from 'axios';
 
 export default function Login () {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [credentialError, setCredentialError] = useState(false);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const auth = useAuth();
+
+    const redirectPath = location.state?.path || '/dashboard'
 
     const handleEmailChange = event => {
-        console.log(event.target.value);
+        if (event.target.value !== '') {
+            setCredentialError(false)
+        }
         setEmail(event.target.value);
     }
 
     const handlePasswordChange = event => {
-        console.log(event.target.value);
+        if (event.target.value !== '') {
+            setCredentialError(false)
+        }
         setPassword(event.target.value);
     }
 
+    const validate = () => {
+        if (email === '' || password === '') {
+            setCredentialError(!credentialError)
+        }
+    }
     const handleSubmit = event => {
         event.preventDefault();
-        console.log("here")
-        console.log("email: ",email);
-        console.log("password: ",password);
+        validate();
+        axios.post(API_URL+`posts`, {
+            username: email,
+            pwd: password
+        })
+        .then(
+            res => {
+                const data = res.data;
+                console.log(res.data);
+            }
+        )
+        .catch( err => console.log(err))
+        auth.login(email);
+        navigate(redirectPath,{replace: true})
+
     }
     return(
         <section className="h-screen">
@@ -71,6 +102,7 @@ export default function Login () {
                                 >
                                 Sign in
                                 </button>
+                                { credentialError && <h1 className="text-rose-700"> Invalid Credentials</h1>}
                             </form>
                     </div>
                 </div>
