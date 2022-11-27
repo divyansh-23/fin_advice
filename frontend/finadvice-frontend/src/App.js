@@ -1,4 +1,5 @@
 import Login from './components/login';
+import SignUp from './components/signup';
 import { AuthProvider, useAuth } from './components/auth';
 import { RequireAuth } from './components/RequireAuth';
 import NavBar from './components/navbar';
@@ -17,6 +18,7 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp/>} />
         <Route path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>}/>
         <Route path="/course_module" element={<RequireAuth><CourseModule/></RequireAuth>}/>
       </Routes>
