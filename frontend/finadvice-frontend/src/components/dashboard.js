@@ -11,7 +11,7 @@ export default function Dashboard (){
     const [showAddModal, setShowAddModal] = React.useState(false);
 
     useEffect(() => {
-        // Update the document title using the browser API
+        
         axios.get(API_URL+`posts`)
         .then(
             res => {

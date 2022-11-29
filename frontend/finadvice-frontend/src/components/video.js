@@ -14,6 +14,8 @@ export default function VideoPlayer() {
     //     // access to player in all event handlers via event.target
     //     event.target.pauseVideo();
     // });
+    // const url = "https://www.youtube.com/watch?v=9kpg2_JYRZQ&list=PLT6_Bt_TKitIUCEsI-3SGCrVHCy0g_5jd";
+    const url = "https://media.w3.org/2010/05/sintel/trailer_hd.mp4";
     const youtube_parser = ((url) =>{
         var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
         var match = url.match(regExp);
@@ -22,15 +24,21 @@ export default function VideoPlayer() {
 
     return(
         <div className="container mx-auto mt-8">
-            {/* <Player
-                fluid={false}
-                width={1200}
-                height={500}
-            >
-                <source src="https://www.youtube.com/watch?v=9kpg2_JYRZQ&list=PLT6_Bt_TKitIUCEsI-3SGCrVHCy0g_5jd" />
-            </Player> */}
-            <YouTube videoId={youtube_parser("https://www.youtube.com/watch?v=9kpg2_JYRZQ&list=PLT6_Bt_TKitIUCEsI-3SGCrVHCy0g_5jd")} opts={opts} />
+            {
+                youtube_parser(url)!==false? 
+            
+                <YouTube videoId={youtube_parser(url)} opts={opts} />
+                :
+                <Player
+                    fluid={false}
+                    width={1200}
+                    height={500}
+                >
+                    <source src={url} />
+                </Player> 
+            }
             <h1 className="mt-6 text-2xl float-left">What are stocks and how does it work?</h1>
+
 
         </div>
         
