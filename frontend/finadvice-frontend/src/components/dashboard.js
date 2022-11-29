@@ -11,7 +11,7 @@ export default function Dashboard (){
     const [showAddModal, setShowAddModal] = React.useState(false);
 
     useEffect(() => {
-        // Update the document title using the browser API
+        
         axios.get(API_URL+`posts`)
         .then(
             res => {
@@ -20,6 +20,9 @@ export default function Dashboard (){
         )
         .catch(err => console.log(err))
     });
+    const handleAddModalSave = () => {
+        setShowAddModal(false);
+    }
     return(
         
         <div className="container mx-auto mt-8">
@@ -86,7 +89,7 @@ export default function Dashboard (){
                         <button
                             className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                             type="button"
-                            onClick={() => setShowAddModal(false)}
+                            onClick={() => handleAddModalSave()}
                         >
                             Save Changes
                         </button>

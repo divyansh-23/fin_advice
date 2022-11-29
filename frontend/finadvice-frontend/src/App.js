@@ -3,6 +3,7 @@ import SignUp from './components/signup';
 import { AuthProvider, useAuth } from './components/auth';
 import { RequireAuth } from './components/RequireAuth';
 import NavBar from './components/navbar';
+import VideoPlayer from './components/video';
 import './App.css';
 import {
   Routes,
@@ -21,6 +22,7 @@ function App() {
         <Route path="/signup" element={<SignUp/>} />
         <Route path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>}/>
         <Route path="/course_module" element={<RequireAuth><CourseModule/></RequireAuth>}/>
+        <Route path="/video_module" element={<RequireAuth><VideoPlayer/></RequireAuth>}/>
       </Routes>
     </AuthProvider>
   </div>
